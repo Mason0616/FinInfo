@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="基金投研工作台 MVP" />
+  <title>NEON / 投研工作台</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Serif+SC:wght@500;600;700;900&family=Source+Han+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="NEON 投研工作台主页"><span class="brand-mark">N</span><span>NEON<span class="brand-slash">/</span></span></a>
+      <div class="workspace-label">RESEARCH OS <span>V0.1</span></div>
+      <nav class="nav" aria-label="工作区">
+        <button class="nav-item active" data-view="intelligence"><span>◉</span>今日情报 <i>18</i></button>
+        <button class="nav-item" data-view="research"><span>◇</span>研究工坊</button>
+        <button class="nav-item" data-view="content"><span>⌁</span>内容转译</button>
+        <button class="nav-item" data-view="archive"><span>□</span>报告档案</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="source-status"><span class="pulse"></span><div><b>8 / 8</b><small>情报源在线</small></div></div>
+        <button class="user-card"><span class="avatar">Z</span><span><b>Zicarus</b><small>基金研究员</small></span><em>···</em></button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div><p class="eyebrow" id="sectionKicker">08 / 18 · TUESDAY</p><h1 id="viewTitle">晨间情报台</h1></div>
+        <div class="top-actions"><button class="icon-button" aria-label="通知">⌁<span class="notification"></span></button><button class="refresh-button" id="refreshButton"><span>↻</span> 刷新情报</button></div>
+      </header>
+
+      <section class="command-strip">
+        <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="搜索公司、行业或关键词…" aria-label="搜索新闻" /></label>
+        <div class="sources" id="sourceFilters" aria-label="资讯来源筛选"></div>
+      </section>
+
+      <section class="feed-panel">
+        <div class="feed-heading"><div><span class="eyebrow">SIGNALS / LIVE FEED</span><h2>需要你判断的事</h2></div><button class="sort-button" id="sortButton">优先级排序 <span>↓</span></button></div>
+        <div class="feed-meta"><span id="resultCount">06 条信号</span><span>最后同步于 <b id="syncTime">08:16</b></span></div>
+        <div class="news-list" id="newsList"></div>
+      </section>
+    </main>
+
+    <aside class="detail-panel" id="detailPanel">
+      <div class="detail-head"><span class="eyebrow">RESEARCH BRIEF</span><button class="close-detail" aria-label="关闭详情">×</button></div>
+      <div id="detailContent"></div>
+      <section class="content-studio">
+        <div class="studio-heading"><span class="eyebrow">CONTENT STUDIO</span><button class="expand-button" aria-label="展开内容工坊">↗</button></div>
+        <div class="style-tabs" id="styleTabs"><button class="style-tab active" data-style="xiaohongshu">小红书</button><button class="style-tab" data-style="douyin">抖音</button><button class="style-tab" data-style="wechat">公众号</button></div>
+        <textarea id="copyText" aria-label="内容文稿"></textarea>
+        <div class="studio-footer"><span id="copyCount">0 字</span><button class="copy-button" id="copyButton">复制文案</button></div>
+      </section>
+      <section class="outputs">
+        <div class="output-heading"><span class="eyebrow">DELIVERABLES</span><button id="generateButton">+ 生成全部</button></div>
+        <div class="output-grid" id="outputGrid"></div>
+      </section>
+    </aside>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
