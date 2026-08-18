@@ -1,0 +1,21 @@
+:root {
+  color: #111713;
+  background: #f5f3ec;
+  font-family: Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; }
+
+.baseline-page {
+  display: grid;
+  min-height: 100vh;
+  place-content: center;
+  gap: 12px;
+  padding: 24px;
+}
+
+.baseline-page h1, .baseline-page p { margin: 0; }
+
+.baseline-kicker { color: #0c8f68; font-size: 12px; letter-spacing: 0.12em; }
