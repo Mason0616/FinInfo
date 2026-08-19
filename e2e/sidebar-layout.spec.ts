@@ -9,6 +9,9 @@ test('keeps preferences visible and puts recent research below primary navigatio
   await expect(sidebar.getByRole('button', { name: '显示偏好' })).toBeVisible();
   await expect(sidebar.getByRole('link', { name: '关于与方法' })).toHaveCount(1);
   await expect(sidebar.locator('.recent-research').getByRole('link', { name: /铜价与库存/ })).toHaveAttribute('href', '/reports/copper-inventory');
+  await expect(sidebar.locator('.recent-report-card')).toHaveCount(2);
+  await expect(sidebar.locator('.recent-report-card').first()).toContainText('大宗商品');
+  await expect(sidebar.locator('.recent-report-card').first()).toContainText('已发布');
 
   await sidebar.getByRole('button', { name: '收起最近研究' }).click();
   await expect(sidebar.locator('.recent-research a')).toHaveCount(0);

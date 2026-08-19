@@ -17,14 +17,11 @@ export function Dashboard({ initialSignals }: { initialSignals: Signal[] }) {
   const [syncTime, setSyncTime] = useState('08:16');
   const [toast, setToast] = useState('');
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(4);
+  const [pageSize] = useState(3);
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
-    const updatePageSize = () => setPageSize(window.innerHeight < 760 ? 3 : window.innerHeight > 1080 ? 5 : 4);
-    updatePageSize();
-    window.addEventListener('resize', updatePageSize);
     const clock = window.setInterval(() => setNow(new Date()), 1000);
-    return () => { window.removeEventListener('resize', updatePageSize); window.clearInterval(clock); };
+    return () => window.clearInterval(clock);
   }, []);
   const visibleSignals = useMemo(() => initialSignals.filter((signal) => (source === '全部' || signal.source === source) && `${signal.title}${signal.summary}${signal.tags.join('')}`.toLowerCase().includes(query.trim().toLowerCase())).sort((a, b) => descending ? b.priority - a.priority : a.priority - b.priority), [descending, initialSignals, query, source]);
   const selectedSignal = initialSignals.find((signal) => signal.id === selectedId) ?? visibleSignals[0] ?? initialSignals[0];

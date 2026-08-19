@@ -21,13 +21,13 @@ test('paginates signals without leaving a stale brief open', async ({ page }) =>
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
 
-  await expect(page.locator('.news-card')).toHaveCount(4);
+  await expect(page.locator('.news-card')).toHaveCount(3);
   await page.getByRole('button', { name: /国产 GPU 厂商/ }).click();
   await expect(page.locator('.detail-panel')).toBeVisible();
   await page.getByRole('button', { name: '下一页' }).click();
   await expect(page.locator('.detail-panel')).toHaveCount(0);
   await expect(page.getByText('第 2 / 2 页')).toBeVisible();
-  await expect(page.locator('.news-card')).toHaveCount(2);
+  await expect(page.locator('.news-card')).toHaveCount(3);
 });
 
 test('shows today and a live Beijing clock in the dashboard header', async ({ page }) => {
