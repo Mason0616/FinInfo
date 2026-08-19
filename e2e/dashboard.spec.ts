@@ -16,3 +16,22 @@ test('filters signals and switches the selected brief', async ({ page }) => {
   await expect(page.locator('.detail-panel')).toHaveCount(0);
   await expect(page.locator('.main-area')).toHaveClass(/main-area-wide/);
 });
+
+test('paginates signals without leaving a stale brief open', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+
+  await expect(page.locator('.news-card')).toHaveCount(4);
+  await page.getByRole('button', { name: /国产 GPU 厂商/ }).click();
+  await expect(page.locator('.detail-panel')).toBeVisible();
+  await page.getByRole('button', { name: '下一页' }).click();
+  await expect(page.locator('.detail-panel')).toHaveCount(0);
+  await expect(page.getByText('第 2 / 2 页')).toBeVisible();
+  await expect(page.locator('.news-card')).toHaveCount(2);
+});
+
+test('shows today and a live Beijing clock in the dashboard header', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByText(/2026年8月19日.*星期三/)).toBeVisible();
+  await expect(page.locator('[data-testid="beijing-clock"]')).toHaveText(/^\d{2}:\d{2}:\d{2}$/);
+});
