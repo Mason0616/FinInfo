@@ -7,3 +7,9 @@ test('research route accepts a question and explains the static phase', async ({
   await page.getByRole('button', { name: '开始研究' }).click();
   await expect(page.getByText('当前是静态演示')).toBeVisible();
 });
+
+test('expands a public report full analysis on demand', async ({ page }) => {
+  await page.goto('/reports/copper-inventory');
+  await page.getByRole('button', { name: '展开完整分析' }).click();
+  await expect(page.getByText('周期复盘')).toBeVisible();
+});
