@@ -1,6 +1,7 @@
 export type Signal = {
   id: string;
   source: string;
+  sourceUrl?: string;
   publishedAt: string;
   priority: number;
   title: string;

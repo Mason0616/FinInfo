@@ -14,5 +14,6 @@ export function ReportEvidenceVisual({ slug, title }: ReportEvidenceVisualProps)
         ? <ChartFrame title={visualTitle}><path className="evidence-stage" d="M25 64H94V46H163V29H232V15H295" /><circle className="evidence-dot" cx="25" cy="64" r="4" /><circle className="evidence-dot" cx="94" cy="46" r="4" /><circle className="evidence-dot" cx="163" cy="29" r="4" /><circle className="evidence-dot" cx="232" cy="15" r="4" /></ChartFrame>
         : <ChartFrame title={visualTitle}><rect className="evidence-bar" x="26" y="20" width="48" height="52" /><rect className="evidence-bar evidence-bar-secondary" x="101" y="33" width="48" height="39" /><rect className="evidence-bar evidence-bar-muted" x="176" y="43" width="48" height="29" /><rect className="evidence-bar evidence-bar-light" x="251" y="55" width="48" height="17" /></ChartFrame>;
 
-  return <figure className="report-evidence-visual"><figcaption><span>DEMO TREND</span><small>静态演示，不构成数据引用</small></figcaption>{visual}</figure>;
+  const indicator = slug === 'copper-inventory' ? '库存压力 / 价格动能' : slug === 'gpu-inference' ? '推理成本 / 部署采用度' : slug === 'solid-state-battery-demo' ? '中试验证 / 量产路径' : '履约成本 / 经营弹性';
+  return <figure className="report-evidence-visual"><figcaption><span>关键验证指标</span><small>{indicator} · 待接入数据</small></figcaption>{visual}</figure>;
 }

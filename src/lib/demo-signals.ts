@@ -1,14 +1,15 @@
 import type { ResearchDimension, Signal } from '@/lib/domain';
 
 export const sources = ['全部', '华尔街见闻', '东方财富', '36氪', '雪球', '财联社', 'OpenCLI', 'AgentKey'];
+export const domains = ['全部领域', '有色金属', '新能源', '半导体与 AI', '消费', '出口链'];
 
 export const demoSignals: Signal[] = [
-  { id: 'signal-1', source: '华尔街见闻', publishedAt: '2026-08-18T08:12:00+08:00', priority: 92, title: '铜价突破 11,000 美元：库存新低与降息交易共振', summary: 'LME 可用库存跌至多年低位，现货升水继续走阔。', tags: ['有色金属', '宏观'], topic: '铜', brief: '供给扰动和金融属性正在同一时间放大铜的价格弹性。交易层面，短期挤仓风险上升；研究层面，需要验证库存去化的持续性。' },
-  { id: 'signal-2', source: '东方财富', publishedAt: '2026-08-18T07:54:00+08:00', priority: 88, title: '多晶硅期货单日大涨，行业协会拟讨论自律减产', summary: '市场重新定价光伏产业链供给出清进程。', tags: ['新能源', '供给'], topic: '光伏', brief: '减产预期为拥挤的光伏链带来估值修复窗口，但真实的产能出清仍需以现金流和库存数据验证。' },
-  { id: 'signal-3', source: '36氪', publishedAt: '2026-08-18T07:36:00+08:00', priority: 78, title: '国产 GPU 厂商完成新一轮融资，AI 推理需求加速释放', summary: '云厂商采购扩容，推理算力成本成为新竞争焦点。', tags: ['AI', '半导体'], topic: 'AI算力', brief: '推理需求从互联网大厂向行业客户扩散，国产替代与单位算力成本正在共同重塑竞争门槛。' },
-  { id: 'signal-4', source: '雪球', publishedAt: '2026-08-18T07:18:00+08:00', priority: 74, title: '白酒龙头渠道调研：中秋前动销出现区域分化', summary: '经销商库存回落缓慢，礼赠场景恢复仍待观察。', tags: ['消费', '渠道'], topic: '白酒', brief: '渠道并未同步改善。旺季的真实动销和价格体系是判断板块能否转向的关键。' },
-  { id: 'signal-5', source: '财联社', publishedAt: '2026-08-18T06:45:00+08:00', priority: 70, title: '美国大选辩论临近，市场关注关税政策对出口链影响', summary: '外需敏感板块波动率上升，汇率与关税预期交织。', tags: ['宏观', '出口'], topic: '出口链', brief: '政策的不确定性先影响估值，随后才会传导至订单。出口链需要按区域和产品重新拆解风险敞口。' },
-  { id: 'signal-6', source: 'OpenCLI', publishedAt: '2026-08-18T06:22:00+08:00', priority: 66, title: '社区热议：固态电池量产时间线是否再度提前？', summary: '投资者聚焦头部电池厂中试线进展与材料验证。', tags: ['社区信号', '电池'], topic: '固态电池', brief: '社区讨论升温反映预期变化，但产业化节点必须回到良率、成本和客户验证三个可核查指标。' },
+  { id: 'signal-1', source: '华尔街见闻', sourceUrl: 'https://wallstreetcn.com/', publishedAt: '2026-08-18T08:12:00+08:00', priority: 92, title: '铜价突破 11,000 美元：库存新低与降息交易共振', summary: 'LME 可用库存跌至多年低位，现货升水继续走阔。', tags: ['有色金属', '宏观'], topic: '铜', brief: '供给扰动和金融属性正在同一时间放大铜的价格弹性。交易层面，短期挤仓风险上升；研究层面，需要验证库存去化的持续性。' },
+  { id: 'signal-2', source: '东方财富', sourceUrl: 'https://quote.eastmoney.com/', publishedAt: '2026-08-18T07:54:00+08:00', priority: 88, title: '多晶硅期货单日大涨，行业协会拟讨论自律减产', summary: '市场重新定价光伏产业链供给出清进程。', tags: ['新能源', '供给'], topic: '光伏', brief: '减产预期为拥挤的光伏链带来估值修复窗口，但真实的产能出清仍需以现金流和库存数据验证。' },
+  { id: 'signal-3', source: '36氪', sourceUrl: 'https://36kr.com/', publishedAt: '2026-08-18T07:36:00+08:00', priority: 78, title: '国产 GPU 厂商完成新一轮融资，AI 推理需求加速释放', summary: '云厂商采购扩容，推理算力成本成为新竞争焦点。', tags: ['AI', '半导体'], topic: 'AI算力', brief: '推理需求从互联网大厂向行业客户扩散，国产替代与单位算力成本正在共同重塑竞争门槛。' },
+  { id: 'signal-4', source: '雪球', sourceUrl: 'https://xueqiu.com/', publishedAt: '2026-08-18T07:18:00+08:00', priority: 74, title: '白酒龙头渠道调研：中秋前动销出现区域分化', summary: '经销商库存回落缓慢，礼赠场景恢复仍待观察。', tags: ['消费', '渠道'], topic: '白酒', brief: '渠道并未同步改善。旺季的真实动销和价格体系是判断板块能否转向的关键。' },
+  { id: 'signal-5', source: '财联社', sourceUrl: 'https://www.cls.cn/', publishedAt: '2026-08-18T06:45:00+08:00', priority: 70, title: '美国大选辩论临近，市场关注关税政策对出口链影响', summary: '外需敏感板块波动率上升，汇率与关税预期交织。', tags: ['宏观', '出口'], topic: '出口链', brief: '政策的不确定性先影响估值，随后才会传导至订单。出口链需要按区域和产品重新拆解风险敞口。' },
+  { id: 'signal-6', source: 'OpenCLI', sourceUrl: 'https://opencli.com/', publishedAt: '2026-08-18T06:22:00+08:00', priority: 66, title: '社区热议：固态电池量产时间线是否再度提前？', summary: '投资者聚焦头部电池厂中试线进展与材料验证。', tags: ['社区信号', '电池'], topic: '固态电池', brief: '社区讨论升温反映预期变化，但产业化节点必须回到良率、成本和客户验证三个可核查指标。' },
 ];
 
 export const researchDimensions: ResearchDimension[] = [

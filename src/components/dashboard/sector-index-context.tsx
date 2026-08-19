@@ -11,5 +11,5 @@ const sectors: Record<string, { label: string; direction: string; path: string }
 
 export function SectorIndexContext({ signal }: { signal: Signal }) {
   const sector = sectors[signal.topic] ?? { label: signal.topic, direction: '影响待核验', path: 'M4 42C32 42 49 33 70 38S108 30 131 34S175 28 216 26' };
-  return <div className="sector-index-context"><div><span>{sector.label}</span><b>DEMO INDEX</b><small>{sector.direction} · 静态演示走势</small></div><svg aria-label={`${sector.label}领域当日指数示意走势`} role="img" viewBox="0 0 220 60"><path className="sector-grid" d="M0 15H220M0 30H220M0 45H220" /><path className="sector-line" d={sector.path} /></svg></div>;
+  return <div className="sector-index-context"><div><span>{sector.label}</span><b>关键指标</b><small>{sector.direction} · 待接入数据</small></div><svg aria-label={`${sector.label}领域当日指数示意走势`} role="img" viewBox="0 0 220 60"><path className="sector-grid" d="M0 15H220M0 30H220M0 45H220" /><path className="sector-line" d={sector.path} /></svg></div>;
 }

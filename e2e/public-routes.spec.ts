@@ -19,6 +19,9 @@ test('opens a stable report URL from the public report library', async ({ page }
   await expect(page.getByRole('link', { name: /跨境电商/ })).toBeVisible();
   await expect(page.getByRole('img', { name: '铜价与库存示意趋势图' })).toBeVisible();
   await expect(page.getByRole('img', { name: '国产 GPU 推理成本示意趋势图' })).toBeVisible();
+  await expect(page.getByText('库存压力 / 价格动能')).toBeVisible();
+  await expect(page.getByText('关键验证指标').first()).toBeVisible();
+  await expect(page.getByText('待接入数据').first()).toBeVisible();
   const positions = await page.locator('.public-page, .report-pagination').evaluateAll((elements) => elements.map((element) => {
     const bounds = element.getBoundingClientRect();
     return { top: bounds.top, bottom: bounds.bottom };
