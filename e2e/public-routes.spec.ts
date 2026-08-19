@@ -14,3 +14,10 @@ test('opens a stable report URL from the public report library', async ({ page }
   await expect(page.getByRole('heading', { name: '发生了什么' })).toBeVisible();
   await expect(page.getByRole('link', { name: '返回公开报告' })).toHaveAttribute('href', '/reports');
 });
+
+test('about page explains provenance, AI limits and non-advice boundary', async ({ page }) => {
+  await page.goto('/about');
+  await expect(page.getByRole('heading', { name: '关于与方法' })).toBeVisible();
+  await expect(page.getByText(/不是投资、法律或医疗建议/)).toBeVisible();
+  await expect(page.getByRole('heading', { name: '来源与归因' })).toBeVisible();
+});
