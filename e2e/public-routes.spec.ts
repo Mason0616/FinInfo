@@ -14,6 +14,9 @@ test('opens a stable report URL from the public report library', async ({ page }
   await expect(pagination.getByText('第 1 / 1 页')).toBeVisible();
   await expect(pagination.getByRole('button', { name: '上一页' })).toBeDisabled();
   await expect(pagination.getByRole('button', { name: '下一页' })).toBeDisabled();
+  await expect(page.locator('.report-library .report-card')).toHaveCount(4);
+  await expect(page.getByRole('link', { name: /固态电池量产/ })).toBeVisible();
+  await expect(page.getByRole('link', { name: /跨境电商/ })).toBeVisible();
   const reportCardHeight = await page.locator('.report-card').first().evaluate((element) => element.getBoundingClientRect().height);
   expect(reportCardHeight).toBeLessThanOrEqual(190);
   const positions = await page.locator('.public-page, .report-pagination').evaluateAll((elements) => elements.map((element) => {
