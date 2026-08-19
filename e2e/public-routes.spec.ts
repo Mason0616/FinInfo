@@ -14,6 +14,12 @@ test('opens a stable report URL from the public report library', async ({ page }
   await expect(pagination.getByText('第 1 / 1 页')).toBeVisible();
   await expect(pagination.getByRole('button', { name: '上一页' })).toBeDisabled();
   await expect(pagination.getByRole('button', { name: '下一页' })).toBeDisabled();
+  const positions = await page.locator('.public-page, .report-pagination').evaluateAll((elements) => elements.map((element) => {
+    const bounds = element.getBoundingClientRect();
+    return { top: bounds.top, bottom: bounds.bottom };
+  }));
+  expect(positions[1].bottom).toBeLessThanOrEqual(positions[0].bottom - 20);
+  expect(positions[1].bottom).toBeGreaterThan(positions[0].bottom - 80);
   await page.locator('.report-library').getByRole('link', { name: /铜价与库存/ }).click();
   await expect(page).toHaveURL('/reports/copper-inventory');
   await expect(page.getByRole('heading', { name: '发生了什么' })).toBeVisible();

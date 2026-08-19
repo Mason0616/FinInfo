@@ -22,3 +22,5 @@
 @media(min-width:641px){.app-shell{height:100vh;min-height:0;overflow:hidden}.sidebar{position:sticky;top:0;height:100vh;min-height:0;overflow:hidden}.workbench-shell>.main-area,.workbench-shell>.public-page{height:100vh;min-height:0;overflow-y:auto}.workbench-shell>.detail-panel{height:100vh;max-height:none;min-height:0}.sidebar-bottom{flex:none}}
 
 @media(min-width:641px){.sidebar{z-index:30}.display-preferences{z-index:31}.preference-panel{position:fixed;left:248px;bottom:20px;z-index:100}}
+
+@media(min-width:641px){.workbench-shell>.public-page:has(.report-library-panel){display:flex;min-height:0;flex-direction:column}.report-library-panel{display:flex;min-height:0;flex:1;flex-direction:column}.report-library-panel .report-library{min-height:0;flex:1;overflow-y:auto;padding-bottom:20px}.report-library-panel .report-pagination{flex:none;margin-top:0;padding:14px 0 4px;border-top:1px solid var(--line)}}
