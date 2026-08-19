@@ -25,6 +25,19 @@ test('keeps preferences visible and puts recent research below primary navigatio
   expect(sectionTops[1]).toBeLessThan(sectionTops[2]);
 });
 
+test('moves opened reports into recent research in visit order', async ({ page }) => {
+  await page.goto('/reports');
+  await page.getByRole('link', { name: /固态电池量产/ }).click();
+  await expect(page).toHaveURL('/reports/solid-state-battery-demo');
+  await expect(page.locator('.recent-research .recent-report-card').first()).toContainText('固态电池量产');
+
+  await page.goto('/reports');
+  await page.getByRole('link', { name: /跨境电商履约成本/ }).click();
+  await expect(page).toHaveURL('/reports/cross-border-commerce-demo');
+  await expect(page.locator('.recent-research .recent-report-card').first()).toContainText('跨境电商履约成本');
+  await expect(page.locator('.recent-research .recent-report-card')).toHaveCount(3);
+});
+
 test('anchors sidebar utilities to the same viewport position across workspace pages', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   const utilityTops: number[] = [];

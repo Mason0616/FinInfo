@@ -35,3 +35,11 @@ test('shows today and a live Beijing clock in the dashboard header', async ({ pa
   await expect(page.getByText(/2026年8月19日.*星期三/)).toBeVisible();
   await expect(page.locator('[data-testid="beijing-clock"]')).toHaveText(/^\d{2}:\d{2}:\d{2}$/);
 });
+
+test('adds a clearly labelled demo sector index context to each signal card', async ({ page }) => {
+  await page.goto('/');
+
+  await expect(page.getByRole('img', { name: '有色金属领域当日指数示意走势' })).toBeVisible();
+  await expect(page.locator('.news-card').first().getByText('DEMO INDEX')).toBeVisible();
+  await expect(page.locator('.news-card').first().getByText('静态演示走势')).toBeVisible();
+});

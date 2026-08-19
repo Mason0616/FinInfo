@@ -17,14 +17,19 @@ test('opens a stable report URL from the public report library', async ({ page }
   await expect(page.locator('.report-library .report-card')).toHaveCount(4);
   await expect(page.getByRole('link', { name: /固态电池量产/ })).toBeVisible();
   await expect(page.getByRole('link', { name: /跨境电商/ })).toBeVisible();
-  const reportCardHeight = await page.locator('.report-card').first().evaluate((element) => element.getBoundingClientRect().height);
-  expect(reportCardHeight).toBeLessThanOrEqual(190);
+  await expect(page.getByRole('img', { name: '铜价与库存示意趋势图' })).toBeVisible();
+  await expect(page.getByRole('img', { name: '国产 GPU 推理成本示意趋势图' })).toBeVisible();
   const positions = await page.locator('.public-page, .report-pagination').evaluateAll((elements) => elements.map((element) => {
     const bounds = element.getBoundingClientRect();
     return { top: bounds.top, bottom: bounds.bottom };
   }));
   expect(positions[1].bottom).toBeLessThanOrEqual(positions[0].bottom - 20);
   expect(positions[1].bottom).toBeGreaterThan(positions[0].bottom - 80);
+  const gridAndPagination = await page.locator('.report-library, .report-pagination').evaluateAll((elements) => ({
+    gridBottom: elements[0].getBoundingClientRect().bottom,
+    paginationTop: elements[1].getBoundingClientRect().top,
+  }));
+  expect(gridAndPagination.paginationTop - gridAndPagination.gridBottom).toBeLessThanOrEqual(20);
   await page.locator('.report-library').getByRole('link', { name: /铜价与库存/ }).click();
   await expect(page).toHaveURL('/reports/copper-inventory');
   await expect(page.getByRole('heading', { name: '发生了什么' })).toBeVisible();
