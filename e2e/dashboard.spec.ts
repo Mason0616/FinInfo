@@ -37,9 +37,33 @@ test('shows today and a live Beijing clock in the dashboard header', async ({ pa
 });
 
 test('adds a clearly labelled demo sector index context to each signal card', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
 
   await expect(page.getByRole('img', { name: '有色金属领域当日指数示意走势' })).toBeVisible();
   await expect(page.locator('.news-card').first().getByText('DEMO INDEX')).toBeVisible();
   await expect(page.locator('.news-card').first().getByText('静态演示走势')).toBeVisible();
+  const cardLayout = await page.locator('.news-card').first().evaluate((card) => {
+    const chart = card.querySelector('.sector-index-context');
+    const title = card.querySelector('h3');
+    if (!chart || !title) return null;
+    const chartBox = chart.getBoundingClientRect();
+    const titleBox = title.getBoundingClientRect();
+    return { chartLeft: chartBox.left, titleRight: titleBox.right, chartTop: chartBox.top, titleBottom: titleBox.bottom };
+  });
+  expect(cardLayout).not.toBeNull();
+  expect(cardLayout!.chartLeft).toBeGreaterThan(cardLayout!.titleRight);
+  expect(Math.abs(cardLayout!.chartTop - cardLayout!.titleBottom)).toBeLessThan(80);
+  await expect(page.locator('.feed-pagination')).toBeInViewport();
+});
+
+test('switches between priority and publication-time sorting', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('button', { name: /优先级排序/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /时间排序/ })).toBeVisible();
+  await page.getByRole('button', { name: /时间排序/ }).click();
+  await expect(page.locator('.sort-button.active')).toContainText('时间排序');
+  await expect(page.locator('.news-card').first()).toContainText('铜价突破');
+  await page.getByRole('button', { name: /时间排序/ }).click();
+  await expect(page.locator('.sort-button.active')).toContainText('时间排序');
 });
