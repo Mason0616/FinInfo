@@ -16,7 +16,12 @@ test('opens a stable report URL from the public report library', async ({ page }
 });
 
 test('about page explains provenance, AI limits and non-advice boundary', async ({ page }) => {
-  await page.goto('/about');
+  await page.goto('/');
+  await expect(page.getByRole('navigation', { name: '工作区' }).getByRole('link', { name: '关于与方法' })).toBeVisible();
+  await page.getByRole('navigation', { name: '工作区' }).getByRole('link', { name: '关于与方法' }).click();
+  await expect(page).toHaveURL('/about');
+  await expect(page.getByRole('navigation', { name: '工作区' }).getByRole('link', { name: '关于与方法' })).toHaveClass(/active/);
+
   await expect(page.getByRole('heading', { name: '关于与方法' })).toBeVisible();
   await expect(page.getByText(/不是投资、法律或医疗建议/)).toBeVisible();
   await expect(page.getByRole('heading', { name: '来源与归因' })).toBeVisible();
