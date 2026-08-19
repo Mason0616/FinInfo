@@ -8,3 +8,19 @@ export const publicReports: PublicReport[] = [
 export function getPublicReport(slug: string): PublicReport | undefined {
   return publicReports.find((report) => report.slug === slug);
 }
+
+export type TranslationChannel = 'short-post' | 'video-script' | 'article';
+export type TranslationDrafts = Record<string, Record<TranslationChannel, string>>;
+
+export const translationDrafts: TranslationDrafts = {
+  'copper-inventory': {
+    'short-post': '铜价上涨，不只是一句“需求变好了”。\n\n这轮行情同时受到库存去化和流动性预期影响。想继续跟踪，可以看 LME 可用库存、中国现货升水和铜精矿加工费。\n\n资料基于公开报告整理，不是投资建议。',
+    'video-script': '铜价为什么又被讨论？\n\n先别急着看价格。关键有三件事：第一，库存是否继续下降；第二，现货升水是否变强；第三，宏观流动性预期有没有变化。\n\n这三项一起走强，价格弹性才可能被放大。完整证据和不确定性，请回到来源报告核验。',
+    article: '# 铜价与库存：价格重估背后的供给约束\n\n## 结论\n库存去化与流动性预期共同推高价格，但短期交易拥挤度上升。\n\n## 核验重点\n1. LME 可用库存；\n2. 中国现货升水；\n3. 铜精矿加工费。\n\n本文为基于公开研究的传播草稿，请回到来源报告查看证据与不确定性。',
+  },
+  'gpu-inference': {
+    'short-post': '国产 GPU 融资热度上升，不等于商业化已经兑现。\n\n更值得关注的是：真实采购是否扩大、单位推理成本是否下降、行业客户是否愿意持续部署。\n\n资料基于公开报告整理，请自行核验。',
+    'video-script': '国产 GPU 推理需求，到底看什么？\n\n融资只是一个信号。真正需要验证的是云厂商采购、单位推理成本，以及行业客户的复用案例。\n\n性能之外，软件生态和迁移成本同样决定落地速度。完整来源见公开报告。',
+    article: '# 国产 GPU 推理需求：融资热度之外的验证框架\n\n## 结论\n推理需求在扩散，但采购节奏、软件生态与单位算力成本仍决定真实落地速度。\n\n## 三个跟踪问题\n1. 云厂商采购是否持续扩大？\n2. 单位推理成本是否下降？\n3. 部署案例能否复用？\n\n本文为基于公开研究的传播草稿，请自行核验。',
+  },
+};
