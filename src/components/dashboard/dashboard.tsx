@@ -22,7 +22,7 @@ export function Dashboard({ initialSignals }: { initialSignals: Signal[] }) {
   const refresh = () => { const now = new Date(); setSyncTime(now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', hour12: false })); notify('晨间情报已刷新：8 个源连接正常'); };
 
   return <WorkbenchShell>
-    <main className={`main-area ${isBriefOpen ? '' : 'main-area-wide'}`}><header className="topbar"><div><p className="eyebrow">08 / 18 · TUESDAY</p><h1>晨间情报台</h1></div><div className="top-actions"><button className="icon-button" aria-label="通知">⌁<span className="notification" /></button><button className="refresh-button" onClick={refresh}><span>↻</span> 刷新情报</button></div></header>
+    <main className={`main-area ${isBriefOpen ? '' : 'main-area-wide'}`}><header className="topbar"><div><p className="eyebrow">08 / 18 · TUESDAY</p><h1>晨间情报台</h1></div><div className="top-actions"><button className="refresh-button" onClick={refresh}><span>↻</span> 刷新情报</button></div></header>
       <section className="command-strip"><label className="search"><span>⌕</span><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索公司、行业或关键词…" aria-label="搜索新闻" /></label><div className="sources" aria-label="资讯来源筛选">{sources.map((item) => <button className={`source-chip ${source === item ? 'active' : ''}`} key={item} onClick={() => setSource(item)}>{item}</button>)}</div></section>
       <NewsFeed signals={visibleSignals} selectedId={selectedId} descending={descending} syncTime={syncTime} onSelect={(id) => { setSelectedId(id); setIsBriefOpen(true); }} onToggleSort={() => setDescending(!descending)} />
     </main>

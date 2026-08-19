@@ -8,5 +8,5 @@ const sections = [
 ];
 
 export default function AboutPage() {
-  return <WorkbenchShell><main className="main-area public-page about-page"><p className="eyebrow">ABOUT / METHOD & LIMITS</p><h1>关于与方法</h1><p className="public-lede">NEON 是一个面向公众的研究助手：帮助你理解发生了什么、证据来自哪里，以及哪些问题仍不确定。</p><div className="method-grid">{sections.map((section) => <section key={section.number}><span>{section.number}</span><h2>{section.title}</h2><p>{section.body}</p></section>)}</div><section className="non-advice"><span className="eyebrow">重要说明</span><p>内容仅供信息参考，不是投资、法律或医疗建议，也不构成任何其他专业建议。</p></section></main></WorkbenchShell>;
+  return <WorkbenchShell><main className="main-area public-page public-page-wide about-page"><p className="eyebrow">ABOUT / METHOD & LIMITS</p><h1>关于与方法</h1><p className="public-lede">NEON 是一个面向公众的研究助手：帮助你理解发生了什么、证据来自哪里，以及哪些问题仍不确定。</p><div className="method-grid">{sections.map((section) => <section key={section.number}><span>{section.number}</span><h2>{section.title}</h2><p>{section.body}</p></section>)}</div><section className="non-advice"><span className="eyebrow">重要说明</span><p>内容仅供信息参考，不是投资、法律或医疗建议，也不构成任何其他专业建议。</p></section></main></WorkbenchShell>;
 }

@@ -7,6 +7,6 @@ export default async function ReportDetailPage({ params }: { params: Promise<{ s
   const { slug } = await params;
   const report = getPublicReport(slug);
   if (!report) notFound();
-  return <WorkbenchShell><main className="main-area public-page report-page"><Link className="back-link" href="/reports">← 返回公开报告</Link><ReportView report={report} /></main></WorkbenchShell>;
+  return <WorkbenchShell><main className="main-area public-page public-page-wide report-page"><Link className="back-link" href="/reports">← 返回公开报告</Link><ReportView report={report} /></main></WorkbenchShell>;
 }
 import Link from 'next/link';

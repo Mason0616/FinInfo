@@ -3,6 +3,7 @@ import { expect, test } from '@playwright/test';
 test('filters signals and switches the selected brief', async ({ page }) => {
   await page.goto('/');
 
+  await expect(page.getByRole('button', { name: '通知' })).toHaveCount(0);
   await expect(page.locator('.detail-panel')).toHaveCount(0);
 
   await page.getByRole('button', { name: '36氪', exact: true }).click();

@@ -21,3 +21,10 @@ test('about page explains provenance, AI limits and non-advice boundary', async 
   await expect(page.getByText(/不是投资、法律或医疗建议/)).toBeVisible();
   await expect(page.getByRole('heading', { name: '来源与归因' })).toBeVisible();
 });
+
+test('public pages use the full workspace width', async ({ page }) => {
+  for (const path of ['/research', '/reports', '/translate', '/about']) {
+    await page.goto(path);
+    await expect(page.locator('.public-page')).toHaveClass(/public-page-wide/);
+  }
+});
