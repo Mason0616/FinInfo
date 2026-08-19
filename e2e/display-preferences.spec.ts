@@ -30,3 +30,17 @@ test('applies a clearly different text scale across public pages', async ({ page
   const researchTitle = page.getByRole('heading', { name: '开始研究' });
   await expect.poll(async () => researchTitle.evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThan(defaultSize * 1.15);
 });
+
+test('keeps the preferences panel above the workspace content', async ({ page }) => {
+  await page.goto('/reports');
+  await page.getByRole('button', { name: '显示偏好' }).click();
+  const panel = page.getByRole('dialog', { name: '显示偏好' });
+  await expect(panel).toBeVisible();
+
+  const pointIsInPanel = await panel.evaluate((element) => {
+    const bounds = element.getBoundingClientRect();
+    const topElement = document.elementFromPoint(bounds.left + 20, bounds.top + 20);
+    return topElement === element || element.contains(topElement);
+  });
+  expect(pointIsInPanel).toBe(true);
+});

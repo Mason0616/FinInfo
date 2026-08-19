@@ -9,6 +9,11 @@ test('primary navigation uses public URLs and marks the active route', async ({ 
 
 test('opens a stable report URL from the public report library', async ({ page }) => {
   await page.goto('/reports');
+  const pagination = page.getByRole('navigation', { name: '报告分页' });
+  await expect(pagination).toBeVisible();
+  await expect(pagination.getByText('第 1 / 1 页')).toBeVisible();
+  await expect(pagination.getByRole('button', { name: '上一页' })).toBeDisabled();
+  await expect(pagination.getByRole('button', { name: '下一页' })).toBeDisabled();
   await page.locator('.report-library').getByRole('link', { name: /铜价与库存/ }).click();
   await expect(page).toHaveURL('/reports/copper-inventory');
   await expect(page.getByRole('heading', { name: '发生了什么' })).toBeVisible();
