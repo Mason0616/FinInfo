@@ -24,3 +24,23 @@ test('keeps preferences visible and puts recent research below primary navigatio
   expect(sectionTops[0]).toBeLessThan(sectionTops[1]);
   expect(sectionTops[1]).toBeLessThan(sectionTops[2]);
 });
+
+test('anchors sidebar utilities to the same viewport position across workspace pages', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const utilityTops: number[] = [];
+
+  for (const path of ['/', '/research', '/reports', '/translate']) {
+    await page.goto(path);
+    utilityTops.push(await page.locator('.sidebar-bottom').evaluate((element) => element.getBoundingClientRect().top));
+  }
+
+  expect(Math.max(...utilityTops) - Math.min(...utilityTops)).toBeLessThanOrEqual(1);
+
+  await page.goto('/research');
+  await page.getByRole('tab', { name: '粘贴文本' }).click();
+  await page.getByRole('textbox', { name: '研究输入' }).fill('比较固态电池量产的主要争议');
+  await page.getByRole('button', { name: '开始研究' }).click();
+  await expect(page.getByText('当前是静态演示')).toBeVisible();
+  const afterSubmitTop = await page.locator('.sidebar-bottom').evaluate((element) => element.getBoundingClientRect().top);
+  expect(Math.abs(afterSubmitTop - utilityTops[1])).toBeLessThanOrEqual(1);
+});
