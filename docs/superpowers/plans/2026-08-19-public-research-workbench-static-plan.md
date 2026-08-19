@@ -164,6 +164,26 @@ test('opens a stable report URL and expands its full analysis', async ({ page })
 });
 ```
 
+Before implementing any future server-backed report/API boundary, add these failure-first contract tests. They are intentionally part of the report task because reports are the first public data surface:
+
+```ts
+it('shows a retryable state when the report request times out', async () => {
+  await expect(fetchReport('/api/reports/copper-inventory', { timeoutMs: 100 })).rejects.toMatchObject({ code: 'TIMEOUT' });
+});
+
+it('rejects an HTML error page returned where JSON was expected', async () => {
+  const response = new Response('<html>502 Bad Gateway</html>', { headers: { 'content-type': 'text/html' }, status: 502 });
+  await expect(parseReportResponse(response)).rejects.toMatchObject({ code: 'INVALID_JSON' });
+});
+
+it('rejects JSON with null required report fields', async () => {
+  const response = new Response(JSON.stringify({ slug: null, title: null, conclusion: null }), { headers: { 'content-type': 'application/json' } });
+  await expect(parseReportResponse(response)).rejects.toMatchObject({ code: 'INVALID_SCHEMA' });
+});
+```
+
+The UI mapping for these failures must be explicit: timeout shows `请求超时，请稍后重试`; non-JSON responses show `服务暂时不可用`; null required fields show `报告数据不完整`. Do not render `null`, raw HTML or an empty report as if it were valid content.
+
 - [ ] **Step 2: Run before implementing fixtures and pages**
 
 Run: `npm run test:e2e -- public-routes.spec.ts public-workflows.spec.ts`
