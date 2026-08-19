@@ -5,3 +5,5 @@ out/
 test-results/
 playwright-report/
 .superpowers/
+.open-next/
+.wrangler/

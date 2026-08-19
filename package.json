@@ -5,12 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:cloudflare": "opennextjs-cloudflare build",
+    "preview:cloudflare": "opennextjs-cloudflare build && wrangler dev",
+    "deploy:cloudflare": "opennextjs-cloudflare build && wrangler deploy",
     "test": "vitest",
     "test:e2e": "playwright test",
     "lint": "eslint ."
   },
   "dependencies": {
-    "next": "16.1.6",
+    "next": "16.2.11",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
@@ -22,6 +25,8 @@
     "typescript": "5.8.2",
     "eslint": "9.22.0",
     "eslint-config-next": "16.1.6",
-    "vitest": "3.0.8"
+    "vitest": "3.0.8",
+    "@opennextjs/cloudflare": "latest",
+    "wrangler": "latest"
   }
 }
