@@ -35,7 +35,6 @@ const choices = [
   { key: 'fontSize', label: '字号', options: [['small', '小'], ['default', '默认'], ['large', '大']] },
   { key: 'density', label: '阅读密度', options: [['comfortable', '舒适'], ['compact', '紧凑']] },
   { key: 'timeFormat', label: '时间格式', options: [['exact', '精确时间'], ['relative', '相对时间']] },
-  { key: 'sidebar', label: '侧边栏', options: [['expanded', '展开'], ['compact', '紧凑']] },
 ] as const;
 
 export function DisplayPreferences() {
@@ -43,6 +42,6 @@ export function DisplayPreferences() {
   const [preferences, setPreferences] = useState<Preferences>(() => typeof window === 'undefined' ? defaults : readPreferences());
   useEffect(() => { applyPreferences(preferences); }, [preferences]);
   useEffect(() => { const close = (event: KeyboardEvent) => { if (event.key === 'Escape') setOpen(false); }; window.addEventListener('keydown', close); return () => window.removeEventListener('keydown', close); }, []);
-  const update = (key: keyof Preferences, value: string) => { const next = { ...preferences, [key]: value } as Preferences; setPreferences(next); applyPreferences(next); window.localStorage.setItem(storageKey, JSON.stringify(next)); };
+  const update = (key: keyof Preferences, value: string) => { const sidebar = document.documentElement.dataset.sidebar === 'compact' ? 'compact' : 'expanded'; const next = { ...preferences, sidebar, [key]: value } as Preferences; setPreferences(next); applyPreferences(next); window.localStorage.setItem(storageKey, JSON.stringify(next)); };
   return <div className="display-preferences"><button aria-expanded={open} className="preference-trigger" onClick={() => setOpen(!open)}>⚙ 显示偏好</button>{open && <div className="preference-panel" role="dialog" aria-label="显示偏好"><p className="eyebrow">DISPLAY PREFERENCES</p>{choices.map((group) => <fieldset key={group.key}><legend>{group.label}</legend><div>{group.options.map(([value, label]) => <label key={value}><input checked={preferences[group.key] === value} name={group.key} onChange={() => update(group.key, value)} type="radio" value={value} />{label}</label>)}</div>{group.key === 'timeFormat' && <small>真实数据接入后生效</small>}</fieldset>)}</div>}</div>;
 }
