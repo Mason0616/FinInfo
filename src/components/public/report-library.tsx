@@ -6,7 +6,7 @@ import { ReportCard } from './report-card';
 
 export function ReportLibrary({ reports }: { reports: PublicReport[] }) {
   const [page, setPage] = useState(1);
-  const pageSize = 3;
+  const pageSize = 4;
   const pageCount = Math.max(1, Math.ceil(reports.length / pageSize));
   const currentPage = Math.min(page, pageCount);
   const visibleReports = reports.slice((currentPage - 1) * pageSize, currentPage * pageSize);

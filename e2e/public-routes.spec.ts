@@ -14,6 +14,8 @@ test('opens a stable report URL from the public report library', async ({ page }
   await expect(pagination.getByText('第 1 / 1 页')).toBeVisible();
   await expect(pagination.getByRole('button', { name: '上一页' })).toBeDisabled();
   await expect(pagination.getByRole('button', { name: '下一页' })).toBeDisabled();
+  const reportCardHeight = await page.locator('.report-card').first().evaluate((element) => element.getBoundingClientRect().height);
+  expect(reportCardHeight).toBeLessThanOrEqual(190);
   const positions = await page.locator('.public-page, .report-pagination').evaluateAll((elements) => elements.map((element) => {
     const bounds = element.getBoundingClientRect();
     return { top: bounds.top, bottom: bounds.bottom };
