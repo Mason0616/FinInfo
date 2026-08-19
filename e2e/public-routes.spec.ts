@@ -12,4 +12,5 @@ test('opens a stable report URL from the public report library', async ({ page }
   await page.getByRole('link', { name: /铜价与库存/ }).click();
   await expect(page).toHaveURL('/reports/copper-inventory');
   await expect(page.getByRole('heading', { name: '发生了什么' })).toBeVisible();
+  await expect(page.getByRole('link', { name: '返回公开报告' })).toHaveAttribute('href', '/reports');
 });
